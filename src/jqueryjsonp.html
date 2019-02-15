@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jsonpjquery</title>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+  <style>
+    img {
+      height: 100px;
+      float: left;
+    }
+  </style>
+</head>
+<body>
+<div id="images"></div>
+<script>
+
+  $.ajaxSetup({cache: false});
+
+  // $(function () { // document.ready
+    (function () {
+      var url2 = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+      $.getJSON(url2,
+        {
+          tags: "canarias,canteras",
+          tagmode: "all",
+          format: "json"
+        }
+      ).done(function (data) {
+        $.each(data.items, function (i, item) {
+          // TODO ? para comprobar que la variable existe
+          // $("<img>").attr("src",item?.media?.m).appendTo("#images");
+          $("<img>").attr("src",item.media.m).appendTo("#images");
+        });
+      }).fail(function (error) {
+        console.log("error en el ajax", error);
+      }).always(function () {
+        console.log("completado");
+      });
+    })();
+  // });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+div h1 {
+  color: lightpink; }
+
+td {
+  vertical-align: middle !important; }
+
+.table th {
+  text-align: center; }
+.table td {
+  text-align: center; }
+
+.glyphicon:hover {
+  cursor: pointer;
+  color: red; }
+
+.checkbox-inline > label {
+  user-select: none;
+  cursor: pointer; }
+
+/*# sourceMappingURL=app.component.css.map */

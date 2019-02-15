@@ -1,0 +1,71 @@
+<!--<app-call-back-hell></app-call-back-hell>-->
+<app-reactive></app-reactive>
+<div class="page-header">
+  <h1>{{model.user}}
+    <span class="label label-default"
+          [ngClass]="{'label-success': TnIncompletas()<=2, 'label-warning': TnIncompletas()>2}"
+          *ngIf="TnIncompletas()>0"
+    >
+      {{TnIncompletas()}}
+    </span>
+  </h1>
+</div>
+
+<div class="panel">
+
+  <div class="input-group">
+    <input type="text" class="form-control" (keyup.enter)="addItem(item.value); item.value=''" #item>
+    <span class="input-group-btn">
+      <button class="btn btn-default" (click)="addItem(item.value); item.value=''">Add</button>
+    </span>
+  </div>
+
+
+  <div class="checkbox-inline">
+    <label for="show">
+      <input id="show" type="checkbox" [(ngModel)]="mostrarTodas">Mostrar todas
+    </label>
+  </div>
+
+  <div class="checkbox-inline">
+    <label for="order">
+      <input id="order" type="checkbox" [(ngModel)]="ordenarPrioridad">Ordenar por prioridad
+    </label>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Description</th>
+      <th>Done</th>
+      <th>Priority</th>
+      <th>Json</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of model.items | ordenaTareas: !ordenarPrioridad | filtroDone: !mostrarTodas; let i=index">
+      <td>{{item.action}}</td>
+      <td><input type="checkbox" [(ngModel)]="item.done"></td>
+      <!--<td>{{item.done}}</td>-->
+      <td>
+        <app-prioridad
+          [prioridad]="item.prioridad"
+          (nuevaPrioridad)="nuevaPrioridad($event, item.action)"
+        ></app-prioridad>
+      </td>
+
+      <td>{{item|json}}</td>
+      <td><i class="glyphicon glyphicon-trash" (click)="delete(i)"></i></td>
+
+    </tr>
+    </tbody>
+  </table>
+
+  <!--{{fecha|date: 'dd/MM/yyyy'}}-->
+
+
+</div>
+
+
+

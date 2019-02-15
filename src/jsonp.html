@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <title>jsonp</title>
+  <!--http://api.flickr.com/services/feeds/photos_public.gne?tags=Canarias&tagmode?any&format=json-->
+
+  <script type="text/javascript">
+    function showPrice(data) {
+      alert("Título: " + data.title + ". Link: " + data.link);
+    }
+
+    // function jsonFlickrFeed(data) {
+    //   alert("Titulo: " + data.titulo + ". Link: " + data.link);
+    // }
+
+    var url1 = "jsonp.js";
+    var url2 = "http://api.flickr.com/services/feeds/photos_public.gne?tags=Canarias&tagmode?any&format=json&jsoncallback=showPrice";
+    var script = document.createElement("script");
+    script.setAttribute("src", url2);
+
+    document.getElementsByTagName('head')[0].appendChild(script);
+  </script>
+
+
+  <!--<script type="text/javascript">-->
+  <!--showPrice({symbol: "ibm", price: "199"})-->
+  <!--</script>-->
+</head>
+<body>
+
+</body>
+</html>
