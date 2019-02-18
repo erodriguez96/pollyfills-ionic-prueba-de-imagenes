@@ -12,9 +12,16 @@ declare var $: any; // para que sepa que ese dolar es de jquery
   selector: 'app-reactive',
   template: `
     <input type="text" class="form-control" id="search" placeholder="search...">
-    <div class="images-grid">
-      <div class="row">
-        <div id="images">
+    <!--<div class="images-grid">-->
+      <!--<div class="row">-->
+        <!--<div id="images">-->
+          <!---->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div class="container">
+      <div class="row" *ngFor="let file of fotos">
+        <div class="col-sm-4" *ngFor="let foto of file">
           
         </div>
       </div>
@@ -50,27 +57,30 @@ export class ReactiveComponent implements OnInit, OnDestroy {
 
     this.su = keyups.subscribe(
       // (data) => console.log(data),
-      (data) => {
+      (data:any) => {
+
+
+
         //limpiar el div porque si no se amontonan las imagenes amijo. (https://api.jquery.com/empty/)
-        $('#images').empty();
+        // $('#images').empty();
         //iterar a traves de lo que nos devuelva flickr
         // @ts-ignore
-        $.each(data.items, function (i, item) {
+        // $.each(data.items, function (i, item) {
           // $('<div>').attr('class', 'img-container').appendTo('#images');
-          $('<img>')
-            .attr('src', item.media.m)
-            .attr('class', 'col-sm-3')
-            .click(function(i){
+          // $('<img>')
+          //   .attr('src', item.media.m)
+          //   .attr('class', 'col-sm-3')
+          //   .click(function(i){
               //console.log(i);
-              $(i.target).remove();
-            })
-            .css({
-              //'width':'50%',
-              'height':'200px',
-              'margin':'10px'
-            })
-            .appendTo('#images');
-        });
+              // $(i.target).remove();
+            // })
+            // .css({
+            //   'width':'50%',
+              // 'height':'200px',
+              // 'margin':'10px'
+            // })
+            // .appendTo('#images');
+        // });
       },
       (error) => console.log(error),
       () => console.log('completed!!!')
